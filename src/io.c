@@ -1100,3 +1100,16 @@ mrb_init_io(mrb_state *mrb)
 
   mrb_gv_set(mrb, mrb_intern_cstr(mrb, "$/"), mrb_str_new_cstr(mrb, "\n"));
 }
+
+#define DONE mrb_gc_arena_restore(mrb, 0)
+
+void
+mrb_mruby_io_gem_init(mrb_state* mrb)
+{
+  mrb_init_io(mrb); DONE;
+}
+
+void
+mrb_mruby_io_gem_final(mrb_state* mrb)
+{
+}
