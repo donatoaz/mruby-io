@@ -6,8 +6,8 @@ mruby-io
 ## Installation
 Add the line below to your `build_config.rb`:
 
-```
-  conf.gem :github => 'mruby-esp32/mruby-io'
+```ruby
+  conf.gem :github => 'mruby-esp32/mruby-io', :branch => 'esp32'
 ```
 
 ## Implemented methods
