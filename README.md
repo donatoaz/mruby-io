@@ -1,15 +1,13 @@
 mruby-io
 ========
-[![Build Status](https://travis-ci.org/iij/mruby-io.svg?branch=master)](https://travis-ci.org/iij/mruby-io)
 
-
-`IO` and `File` classes for mruby
+`IO` class for mruby on ESP32
 
 ## Installation
 Add the line below to your `build_config.rb`:
 
 ```
-  conf.gem :github => 'iij/mruby-io'
+  conf.gem :github => 'mruby-esp32/mruby-io'
 ```
 
 ## Implemented methods
@@ -24,11 +22,11 @@ Add the line below to your `build_config.rb`:
 | IO.copy_stream             |          |      |
 | IO.new, IO.for_fd, IO.open |  o  |     |
 | IO.foreach                 |          |      |
-| IO.pipe                    |    o     |      |
-| IO.popen                   |    o     |      |
+| IO.pipe                    |    o     | not supported on ESP32 |
+| IO.popen                   |    o     | not supported on ESP32 |
 | IO.read                    |    o     |      |
 | IO.readlines               |          |      |
-| IO.select                  |    o     |      |
+| IO.select                  |    o     | not supported on ESP32 |
 | IO.sysopen                 |    o     |      |
 | IO.try_convert             |          |      |
 | IO.write                   |          |      |
@@ -97,78 +95,6 @@ Add the line below to your `build_config.rb`:
 | IO#ungetc                  |    o     |      |
 | IO#write                   |    o     |      |
 | IO#write_nonblock          |          |      |
-
-### File
- - http://doc.ruby-lang.org/ja/1.9.3/class/File.html
-
-| method                      | mruby-io | memo |
-| --------------------------- | -------- | ---- |
-| File.absolute_path          |          |      |
-| File.atime                  |          |      |
-| File.basename               |   o      |      |
-| File.blockdev?              |          | FileTest |
-| File.chardev?               |          | FileTest |
-| File.chmod                  |   o      |      |
-| File.chown                  |          |      |
-| File.ctime                  |          |      |
-| File.delete, File.unlink    |   o      |      |
-| File.directory?             |   o      | FileTest |
-| File.dirname                |   o      |      |
-| File.executable?            |          | FileTest |
-| File.executable_real?       |          | FileTest |
-| File.exist?, exists?        |   o      | FileTest |
-| File.expand_path            |   o      |      |
-| File.extname                |   o      |      |
-| File.file?                  |   o      | FileTest |
-| File.fnmatch, File.fnmatch? |          |      |
-| File.ftype                  |          |      |
-| File.grpowned?              |          | FileTest |
-| File.identical?             |          | FileTest |
-| File.join                   |   o      |      |
-| File.lchmod                 |          |      |
-| File.lchown                 |          |      |
-| File.link                   |          |      |
-| File.lstat                  |          |      |
-| File.mtime                  |          |      |
-| File.new, File.open         |   o      |      |
-| File.owned?                 |          | FileTest |
-| File.path                   |          |      |
-| File.pipe?                  |   o      | FileTest |
-| File.readable?              |          | FileTest |
-| File.readable_real?         |          | FileTest |
-| File.readlink               |   o      |      |
-| File.realdirpath            |          |      |
-| File.realpath               |   o      |      |
-| File.rename                 |   o      |      |
-| File.setgid?                |          | FileTest |
-| File.setuid?                |          | FileTest |
-| File.size                   |   o      |      |
-| File.size?                  |   o      | FileTest |
-| File.socket?                |   o      | FileTest |
-| File.split                  |          |      |
-| File.stat                   |          |      |
-| File.sticky?                |          | FileTest |
-| File.symlink                |          |      |
-| File.symlink?               |   o      | FileTest |
-| File.truncate               |          |      |
-| File.umask                  |   o      |      |
-| File.utime                  |          |      |
-| File.world_readable?        |          |      |
-| File.world_writable?        |          |      |
-| File.writable?              |          | FileTest |
-| File.writable_real?         |          | FileTest |
-| File.zero?                  |   o      | FileTest |
-| File#atime                  |          |      |
-| File#chmod                  |          |      |
-| File#chown                  |          |      |
-| File#ctime                  |          |      |
-| File#flock                  |   o      |      |
-| File#lstat                  |          |      |
-| File#mtime                  |          |      |
-| File#path, File#to_path     |   o      |      |
-| File#size                   |          |      |
-| File#truncate               |          |      |
-
 
 ## License
 
