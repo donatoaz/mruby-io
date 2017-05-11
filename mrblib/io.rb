@@ -363,8 +363,8 @@ class IO
 end
 
 STDIN  = IO.open(0, "r")
-STDOUT = IO.open(1, "w")
-STDERR = IO.open(2, "w")
+STDOUT = IO.open(0, "w")
+STDERR = IO.open(0, "w")
 
 $stdin  = STDIN
 $stdout = STDOUT
