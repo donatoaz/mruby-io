@@ -69,7 +69,7 @@ io_get_open_fptr(mrb_state *mrb, mrb_value self)
   return fptr;
 }
 
-#if !defined(_WIN32) && !defined(_WIN64) && !defined(_ESP32)
+#if !defined(_WIN32) && !defined(_WIN64) && !defined(ESP_PLATFORM)
 static void
 io_set_process_status(mrb_state *mrb, pid_t pid, int status)
 {
@@ -189,7 +189,7 @@ mrb_fd_cloexec(mrb_state *mrb, int fd)
 #endif
 }
 
-#if !defined(_WIN32) && !defined(_ESP32)
+#if !defined(_WIN32) && !defined(ESP_PLATFORM)
 static int
 mrb_cloexec_pipe(mrb_state *mrb, int fildes[2])
 {
@@ -264,7 +264,7 @@ mrb_io_alloc(mrb_state *mrb)
 #define NOFILE 64
 #endif
 
-#if !defined(_WIN32) && !defined(_ESP32)
+#if !defined(_WIN32) && !defined(ESP_PLATFORM)
 static int
 option_to_fd(mrb_state *mrb, mrb_value obj, const char *key)
 {
@@ -487,7 +487,7 @@ fptr_finalize(mrb_state *mrb, struct mrb_io *fptr, int quiet)
     fptr->fd2 = -1;
   }
 
-#if !defined(_WIN32) && !defined(_WIN64) && !defined(_ESP32)
+#if !defined(_WIN32) && !defined(_WIN64) && !defined(ESP_PLATFORM)
   if (fptr->pid != 0) {
     pid_t pid;
     int status;
@@ -739,7 +739,7 @@ mrb_io_pid(mrb_state *mrb, mrb_value io)
   return mrb_nil_value();
 }
 
-#ifndef _ESP32
+#ifndef ESP_PLATFORM
 static struct timeval
 time2timeval(mrb_state *mrb, mrb_value time)
 {
@@ -774,7 +774,7 @@ mrb_io_read_data_pending(mrb_state *mrb, mrb_value io)
 }
 #endif
 
-#if !defined(_WIN32) && !defined(_ESP32)
+#if !defined(_WIN32) && !defined(ESP_PLATFORM)
 static mrb_value
 mrb_io_s_pipe(mrb_state *mrb, mrb_value klass)
 {
@@ -817,7 +817,7 @@ mrb_io_s_pipe(mrb_state *mrb, mrb_value klass)
 static mrb_value
 mrb_io_s_select(mrb_state *mrb, mrb_value klass)
 {
-#ifndef _ESP32
+#ifndef ESP_PLATFORM
   mrb_value *argv;
   mrb_int argc;
   mrb_value read, read_io, write, except, timeout, list;
@@ -1078,14 +1078,14 @@ mrb_init_io(mrb_state* mrb)
   MRB_SET_INSTANCE_TT(io, MRB_TT_DATA);
 
   mrb_include_module(mrb, io, mrb_module_get(mrb, "Enumerable")); /* 15.2.20.3 */
-#if !defined(_WIN32) && !defined(_ESP32)
+#if !defined(_WIN32) && !defined(ESP_PLATFORM)
   mrb_define_class_method(mrb, io, "_popen",  mrb_io_s_popen,   MRB_ARGS_ANY());
 #endif
   mrb_define_class_method(mrb, io, "_sysclose",  mrb_io_s_sysclose, MRB_ARGS_REQ(1));
   mrb_define_class_method(mrb, io, "for_fd",  mrb_io_s_for_fd,   MRB_ARGS_ANY());
   mrb_define_class_method(mrb, io, "select",  mrb_io_s_select,  MRB_ARGS_ANY());
   mrb_define_class_method(mrb, io, "sysopen", mrb_io_s_sysopen, MRB_ARGS_ANY());
-#if !defined(_WIN32) && !defined(_ESP32)
+#if !defined(_WIN32) && !defined(ESP_PLATFORM)
   mrb_define_class_method(mrb, io, "_pipe", mrb_io_s_pipe, MRB_ARGS_NONE());
 #endif
 
