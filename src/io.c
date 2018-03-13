@@ -18,7 +18,9 @@
 #endif
 
 #include <sys/types.h>
+#include <sys/time.h>
 #include <sys/stat.h>
+#include <sys/socket.h>
 
 #if defined(_WIN32) || defined(_WIN64)
   #include <winsock.h>
