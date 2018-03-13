@@ -4,6 +4,9 @@ MRuby::Gem::Specification.new('mruby-io') do |spec|
 
   spec.cc.include_paths << "#{build.root}/src"
   
+  spec.cc.flags = '-DESP_PLATFORM -mlongcalls'
+  spec.cxx.flags = '-DESP_PLATFORM -mlongcalls'
+  
   case RUBY_PLATFORM
   when /mingw|mswin/
     spec.linker.libraries += ['Ws2_32']
